@@ -190,8 +190,9 @@ bool AutoLoadFiles(const char[] path, const char[] remove, eLoad load, bool prin
 			case FileType_File:
 			{
 				bool isBZ2 = StrContains(sPath, ".bz2", false) != -1;
+				bool isZTMP = StrContains(sPath, ".ztmp", false) != -1;
 				
-				if (isBZ2)
+				if (isBZ2 || isZTMP)
 				{
 					//LogDebug("Skipping BZ2 file (handled by engine): %s", sBuffer);
 					continue;
@@ -503,4 +504,5 @@ public Action Command_GenerateExternals(int client, int args)
 	ReplyToCommand(client, "[Auto File Loader] Generation complete. %d files found.", fileCount);
 	
 	return Plugin_Handled;
+
 }
